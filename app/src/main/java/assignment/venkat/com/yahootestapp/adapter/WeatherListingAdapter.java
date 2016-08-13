@@ -13,8 +13,6 @@ import java.util.List;
 import assignment.venkat.com.yahootestapp.R;
 import assignment.venkat.com.yahootestapp.model.Channel;
 
-import static android.support.v7.recyclerview.R.styleable.RecyclerView;
-
 /**
  * Created by venkatgonuguntala on 8/13/16.
  */

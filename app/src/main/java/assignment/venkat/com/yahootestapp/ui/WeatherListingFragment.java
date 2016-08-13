@@ -3,6 +3,7 @@ package assignment.venkat.com.yahootestapp.ui;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,8 +27,9 @@ import retrofit.client.Response;
  * Created by venkatgonuguntala on 8/13/16.
  */
 
-public class WeatherListingFragment extends Fragment {
+public class WeatherListingFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
     private RecyclerView mWeatherListingRecylerView;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
     private YahooWeatherApi mYahooWeatherApi;
     private WeatherListingAdapter mWeatherListingAdapter;
     private List<Channel> mChannelList;
@@ -40,6 +42,7 @@ public class WeatherListingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View mRootView = inflater.inflate(R.layout.weather_listing_fragment, container, false);
         mWeatherListingRecylerView = (RecyclerView) mRootView.findViewById(R.id.search_recycler_view);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) mRootView.findViewById(R.id.swipeRefreshLayout);
         mWeatherListingRecylerView.setHasFixedSize(false);
         mWeatherListingAdapter = new WeatherListingAdapter(getActivity(), mChannelList);
         mWeatherListingRecylerView.setAdapter(mWeatherListingAdapter);
@@ -67,5 +70,19 @@ public class WeatherListingFragment extends Fragment {
 
             }
         });
+        onItemsLoadComplete();
+    }
+
+    @Override
+    public void onRefresh() {
+        getWeatherResults();
+    }
+
+    void onItemsLoadComplete() {
+        // Update the adapter and notify data set changed
+        // ...
+
+        // Stop refresh animation
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 }
