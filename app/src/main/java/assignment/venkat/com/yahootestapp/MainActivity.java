@@ -21,6 +21,8 @@ import retrofit.client.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String TAG = MainActivity.class.getSimpleName();
+
     private static final String WEATHER_FRAGMENT_TAG = "weather_fragment_tag";
 
     @Override
@@ -30,11 +32,11 @@ public class MainActivity extends AppCompatActivity {
 
         WeatherListingFragment savedFragment = (WeatherListingFragment) getSupportFragmentManager().findFragmentByTag(WEATHER_FRAGMENT_TAG);
         if ( savedFragment == null) {
-            WeatherListingFragment viewPagerFragment = new WeatherListingFragment();
+            WeatherListingFragment weatherListingFragment = new WeatherListingFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(R.id.placeHolder, viewPagerFragment, WEATHER_FRAGMENT_TAG);
-            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.add(R.id.placeHolder, weatherListingFragment, WEATHER_FRAGMENT_TAG);
+            //fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         }
 

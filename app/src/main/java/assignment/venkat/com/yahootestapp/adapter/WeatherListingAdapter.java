@@ -50,9 +50,26 @@ public class WeatherListingAdapter  extends RecyclerView.Adapter<WeatherListingA
         Channel channel = mChannelList.get(position);
         holder.mTime.setText(channel.getItem().getCondition().getDate());
         holder.mCity.setText(channel.getLocation().getCity());
-        holder.mWeatherCondition.setText(channel.getItem().getCondition().getText());
+        String weatherCondition = channel.getItem().getCondition().getText();
+        holder.mWeatherCondition.setText(weatherCondition);
         holder.mTemp.setText(channel.getItem().getCondition().getTemp());
-        //holder.mTime.setText(channel.getItem().getCondition().getDate());
+        //checking for different weather conditions and displaying appropriate images available.
+        //few conditions were generic
+        if(weatherCondition.contains("Sunny")){
+            holder.mWeatherImage.setImageResource(R.drawable.ic_clear);
+        }else if(weatherCondition.equalsIgnoreCase("Partly Cloudy")){
+            holder.mWeatherImage.setImageResource(R.drawable.ic_cloudy);
+        }else if(weatherCondition.equalsIgnoreCase("Thunderstorms")){
+            holder.mWeatherImage.setImageResource(R.drawable.ic_storm);
+        }else if(weatherCondition.equalsIgnoreCase("Clear")){
+            holder.mWeatherImage.setImageResource(R.drawable.ic_clear);
+        }else if(weatherCondition.contains("Rain")){
+            holder.mWeatherImage.setImageResource(R.drawable.ic_rain);
+        }else if(weatherCondition.contains("Cloudy")){
+            holder.mWeatherImage.setImageResource(R.drawable.ic_cloudy);
+        }else if(weatherCondition.contains("Snow")){
+            holder.mWeatherImage.setImageResource(R.drawable.ic_snow);
+        }
     }
 
     @Override
